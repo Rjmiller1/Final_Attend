@@ -9,6 +9,7 @@ import Foundation
 class Main{
     var instructors = [InstructorModel]()
     var students = [StudentModel]()
+    var sections = [SectionModel]()
     var currentInstructor: InstructorModel?
     var currentStudent: StudentModel?
     

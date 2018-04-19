@@ -12,10 +12,8 @@ import Firebase
 class StudentHomeViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var attendanceButton: UIButton!
-    
-    
-    let classes = ["EE 327", "EE 355", "CS 350", "CS 450"]
-    
+    let sections = mainInstance.currentStudent?.getSections()
+        
     var didAttend = false
     
     override func viewDidLoad() {
@@ -58,11 +56,11 @@ class StudentHomeViewController: UIViewController, UIPickerViewDataSource, UIPic
     
     // returns the # of rows in each component..
     public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int{
-        return classes.count
+        return sections!.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return classes[row]
+        return sections![row].getSectionID()
     }
  
     

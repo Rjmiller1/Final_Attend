@@ -443,6 +443,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Itm-Wz-V5S"/>
                     </view>
+                    <connections>
+                        <outlet property="pickerView" destination="cBN-l7-ViF" id="lut-kM-SQI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j5B-VL-OB4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -491,10 +494,22 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sww-tF-ElD">
+                                <rect key="frame" x="159" y="297" width="56" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="SUBMIT"/>
+                                <connections>
+                                    <action selector="submitClass:" destination="cNl-cZ-ybj" eventType="touchUpInside" id="TWC-Bw-ldB"/>
+                                    <segue destination="tNi-a6-G07" kind="show" identifier="backToInstructorHome" id="seS-E5-hbN"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="oHc-ml-kcW"/>
                     </view>
+                    <connections>
+                        <outlet property="addClassField" destination="nS3-QA-XiQ" id="Rem-TW-SNa"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="23K-2r-aXL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -672,14 +687,28 @@
                                     <segue destination="9gd-QI-YSq" kind="show" identifier="backToStudentHome" id="O5r-Kd-gXV"/>
                                 </connections>
                             </button>
-                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0ta-e3-oNR">
-                                <rect key="frame" x="0.0" y="222" width="375" height="187"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ez4-3V-8ei">
+                                <rect key="frame" x="151" y="441" width="70" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Add">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="addClass:" destination="BZR-7F-uhv" eventType="touchUpInside" id="UaN-RN-ghA"/>
+                                    <segue destination="9gd-QI-YSq" kind="show" identifier="toStudentHomeView" id="6S5-8C-coO"/>
+                                </connections>
+                            </button>
+                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2bE-se-Ws7">
+                                <rect key="frame" x="0.0" y="147" width="375" height="162"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             </pickerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="dxz-29-3Pb"/>
                     </view>
+                    <connections>
+                        <outlet property="pickerView" destination="2bE-se-Ws7" id="1ry-ua-Mb3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ahD-Ra-9vp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -690,9 +719,8 @@
         <image name="Screen Shot 2018-03-27 at 9.32.29 PM" width="182" height="246"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="M9h-tJ-j6h"/>
-        <segue reference="O5r-Kd-gXV"/>
-        <segue reference="KYb-0I-ung"/>
+        <segue reference="6S5-8C-coO"/>
+        <segue reference="seS-E5-hbN"/>
         <segue reference="0X0-AU-2XZ"/>
     </inferredMetricsTieBreakers>
 </document>

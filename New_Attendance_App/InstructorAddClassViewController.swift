@@ -9,6 +9,9 @@
 import UIKit
 
 class InstructorAddClassViewController: UIViewController {
+    
+    @IBOutlet weak var addClassField: UITextField!
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +27,17 @@ class InstructorAddClassViewController: UIViewController {
     @IBAction func backToInstructor(_ sender: Any){
         self.performSegue(withIdentifier: "BackToInstructor2", sender: self)
     }
+    
+    @IBAction func submitClass(_ sender: Any) {
+        guard let section_id = addClassField?.text else { return }
+        let section = SectionModel(instructor: ((mainInstance.currentInstructor?.getUsername())!), total: 0, section_id: section_id, active: false)
+        mainInstance.currentInstructor?.addSection(section: section)
+        mainInstance.sections.append(section)
+        self.performSegue(withIdentifier: "backToInstructorHome", sender: self)
+        
+    }
+    
+    
     
 
     /*

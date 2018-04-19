@@ -11,10 +11,18 @@ import Firebase
 
 var alert: UIAlertController!
 
-class InstructorHomeViewController: UIViewController {
-  
+class InstructorHomeViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+    @IBOutlet weak var pickerView: UIPickerView!
     
     override func viewDidLoad() {
+        
+        if pickerView.isHidden{
+                    pickerView.isHidden = false
+        }
+
+        pickerView.delegate = self
+        pickerView.dataSource = self
+        pickerView.reloadAllComponents()
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background.png")!)
         // Do any additional setup after loading the view.
@@ -52,6 +60,26 @@ class InstructorHomeViewController: UIViewController {
     
     @IBAction func sendToAddClass(_ sender: Any){
         self.performSegue(withIdentifier: "toInstructorAddClass", sender: self)
+    }
+    
+    
+    public func numberOfComponents(in pickerView: UIPickerView) -> Int{
+        return 1
+    }
+    
+    
+    // returns the # of rows in each component..
+    public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int{
+        return (mainInstance.currentInstructor?.sections.count)!
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return mainInstance.currentInstructor?.sections[row].section_id
+    }
+    
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
     }
     
     func sendAlert(_ sender: Any, message: String){
