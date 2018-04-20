@@ -60,20 +60,45 @@ class SignUpViewController: UIViewController {
                         self.dismiss(animated: false, completion: nil)
                     } else {
                         print("Error: \(error!.localizedDescription)")
+                        //self.sendAlert(self, message: "Invalid Account Credentials")
                     }
                 }
                 
-            } else {
-                print("Error: \(error!.localizedDescription)")
+                
+                //self.performSegue(withIdentifier: "toHomeScreen", sender:self)
+                
             }
+            
+            else {
+                print("Error: \(error!.localizedDescription)")
+                self.sendAlert(self, message: "Invalid Account Credentials")
+            }
+            
         }
-        self.performSegue(withIdentifier: "toHomeScreen", sender:self)
+       
     }
     
     @IBAction func backButton(_ sender:Any){
         self.performSegue(withIdentifier: "backToHome", sender:self)
     }
     
+    func sendAlert(_ sender: Any, message: String){
+        let alert = UIAlertController(title: "Error!", message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            switch action.style{
+            case .default:
+                print("default")
+                
+            case .cancel:
+                print("cancel")
+                
+            case .destructive:
+                print("destructive")
+                
+                
+            }}))
+        self.present(alert, animated: true, completion: nil)
+    }
     
 
     

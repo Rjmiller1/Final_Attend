@@ -102,4 +102,29 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         self.performSegue(withIdentifier: "backToInstructor", sender: self)
     }
     
+    @IBAction func submitRadius(_ sender: Any){
+        guard let radius = radiusField.text else { return }
+        let radiusInteger = Int(radius)
+        print("Integer radius value: ", radiusInteger)
+        sendAlert(self, message: "Location Radius Set")
+    }
+    
+    func sendAlert(_ sender: Any, message: String){
+        let alert = UIAlertController(title: "Success!", message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            switch action.style{
+            case .default:
+                print("default")
+                
+            case .cancel:
+                print("cancel")
+                
+            case .destructive:
+                print("destructive")
+                
+                
+            }}))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
 }

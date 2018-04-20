@@ -8,11 +8,17 @@
 
 import UIKit
 import Firebase
+import CoreLocation
+import MapKit
 
-class StudentHomeViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+class StudentHomeViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, CLLocationManagerDelegate {
+    
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var attendanceButton: UIButton!
     let sections = mainInstance.currentStudent?.getSections()
+    
+    let locationManager: CLLocationManager = CLLocationManager()
+    
         
     var didAttend = false
     
@@ -22,6 +28,7 @@ class StudentHomeViewController: UIViewController, UIPickerViewDataSource, UIPic
         pickerView.dataSource = self
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background.png")!)
+        
     }
     
     @IBAction func handleLogout(_ sender: Any) {
@@ -47,6 +54,41 @@ class StudentHomeViewController: UIViewController, UIPickerViewDataSource, UIPic
         else{
             sendAlert(self, alert: "Uh Oh!", message: "Attendance period is not open");
         }
+    }
+    
+    @IBAction func checkLocationPressed(_ sender: Any){
+        
+        //Getting users location
+        locationManager.delegate = self
+        
+        locationManager.requestAlwaysAuthorization()
+        
+        locationManager.startUpdatingLocation()
+        
+        locationManager.distanceFilter = 100
+        
+        let geoFenceRegion:CLCircularRegion = CLCircularRegion(center: CLLocationCoordinate2DMake(51.509, -0.1337), radius: 10000, identifier: "Test around area")
+        
+        locationManager.startMonitoring(for: geoFenceRegion)
+        
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        for currentLocation in locations{
+            print("\(index): \(currentLocation)")
+            // "0: [locations]"
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
+        print("Entered: \(region.identifier)")
+        sendAlert(self, alert: "Success!", message: "You are within the attendance radius")
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
+        print("Exited: \(region.identifier)")
+        sendAlert(self, alert: "Uh Oh!", message: "You are not within the attendance radius")
     }
 
     public func numberOfComponents(in pickerView: UIPickerView) -> Int{
