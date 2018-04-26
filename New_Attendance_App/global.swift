@@ -7,11 +7,9 @@
 //
 import Foundation
 class Main{
-    var instructors = [InstructorModel]()
-    var students = [StudentModel]()
-    var sections = [SectionModel]()
-    var currentInstructor: InstructorModel?
-    var currentStudent: StudentModel?
+    var currentInstructor: Instructor?
+    var currentStudent: Student?
+    
     
     
     

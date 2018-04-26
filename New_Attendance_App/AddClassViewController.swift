@@ -14,7 +14,7 @@ import FirebaseDatabase
 class AddClassViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate{
     var section_id: String?
     @IBOutlet weak var pickerView: UIPickerView!
-
+    let sections = CoreDataHandler.getSectionIDs()
     
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -27,14 +27,15 @@ class AddClassViewController: UIViewController, UIPickerViewDataSource, UIPicker
     }
     
     @IBAction func addClass(_ sender: Any){
-        let student = mainInstance.currentStudent
-        for i in mainInstance.sections {
+        let section = CoreDataHandler.getSectionBySectionID(section_id: section_id!)
+        mainInstance.currentStudent?.addToSections(section)
+        /*for i in mainInstance.sections {
             if(i.section_id == section_id){
                 student?.addSection(section: i)
                 print("Successfully added section: ",section_id as Any)
 
             }
-        }
+        }*/
         self.performSegue(withIdentifier: "toStudentHomeView", sender: self)
 
 
@@ -72,16 +73,16 @@ class AddClassViewController: UIViewController, UIPickerViewDataSource, UIPicker
     }
     
     public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int{
-        return mainInstance.sections.count
+        return sections!.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return mainInstance.sections[row].section_id
+        return sections![row]
     }
     
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        section_id = mainInstance.sections[row].section_id
+        section_id = sections![row]
     }
 
 }

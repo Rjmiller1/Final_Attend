@@ -30,9 +30,27 @@ class InstructorAddClassViewController: UIViewController {
     
     @IBAction func submitClass(_ sender: Any) {
         guard let section_id = addClassField?.text else { return }
+      /*
         let section = SectionModel(instructor: ((mainInstance.currentInstructor?.getUsername())!), total: 0, section_id: section_id, active: false)
         mainInstance.currentInstructor?.addSection(section: section)
-        mainInstance.sections.append(section)
+        mainInstance.sections.append(section) */
+        
+        if(CoreDataHandler.addSection(total: 0, section_id: section_id, active: false, radius: 100)){
+            print("Successfully created section!")
+        }
+        let section = CoreDataHandler.getSectionBySectionID(section_id: section_id)
+        section.instructor = mainInstance.currentInstructor
+        mainInstance.currentInstructor?.addToSections(section)
+        let context = CoreDataHandler.getContext()
+        
+        do{
+            print("Successfully saved Section with Section id...")
+            print(section.section_id as Any)
+            try context.save()
+        }catch{
+            print("Unable to save added section.")
+        }
+        
         self.performSegue(withIdentifier: "backToInstructorHome", sender: self)
         
     }

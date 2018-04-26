@@ -37,27 +37,19 @@ class LoginViewController: UIViewController {
         Auth.auth().signIn(withEmail: email, password: pass) { user, error in
             if error == nil && user != nil {
                 if email.range(of:"mail") != nil {
-                    dump(mainInstance.instructors)
-                    for i in mainInstance.instructors {
-                        if i.getEmail() == email {
-                            mainInstance.currentInstructor = i
-                            i.loggedIn = true
-                            print("Instructor found from global list with username: ",i.getUsername())
-                        }
-                    }
+                    mainInstance.currentInstructor = CoreDataHandler.getInstructorByEmail(email: email)
+                    mainInstance.currentInstructor?.loggedIn = true
+                    print("Instructor logged in with following username/email")
+                    print(mainInstance.currentInstructor?.username ?? "Not found")
                     
                     self.performSegue(withIdentifier: "toInstructorHomeScreen", sender:self)
                     
                 }
                 else {
-                    dump(mainInstance.students)
-                    for i in mainInstance.students {
-                        if i.getEmail() == email {
-                            mainInstance.currentStudent = i
-                            i.loggedIn = true
-                            print("Student found from global list with username: ",i.getUsername())
-                        }
-                    }
+                    mainInstance.currentStudent = CoreDataHandler.getStudentByEmail(email: email)
+                    mainInstance.currentStudent?.loggedIn = true
+                    print("Student logged in with following username")
+                    print(mainInstance.currentStudent?.username ?? "Not found")
                     
                     self.performSegue(withIdentifier: "toStudentHomeScreen", sender:self)
                     

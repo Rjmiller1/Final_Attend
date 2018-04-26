@@ -8,11 +8,15 @@
 
 import UIKit
 import Firebase
+import CoreData
 
 var alert: UIAlertController!
 
 class InstructorHomeViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     @IBOutlet weak var pickerView: UIPickerView!
+    
+    var sections:[Section]?
+    var section_ids:[String]?
     
     override func viewDidLoad() {
         
@@ -22,6 +26,20 @@ class InstructorHomeViewController: UIViewController, UIPickerViewDataSource, UI
 
         pickerView.delegate = self
         pickerView.dataSource = self
+        sections = mainInstance.currentInstructor?.sections?.allObjects as? [Section]
+
+        if(sections != nil){
+        for i in sections! {
+            print(i.section_id ?? "none")
+            section_ids?.append(i.section_id!)
+        }
+            print("Current sections to be sent to pickerView:")
+            if(section_ids != nil){
+            for i in section_ids!{
+                print(i)
+            }
+            }
+        }
         pickerView.reloadAllComponents()
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background.png")!)
@@ -34,6 +52,25 @@ class InstructorHomeViewController: UIViewController, UIPickerViewDataSource, UI
     }
     
     @IBAction func handleLogout(_ sender: Any) {
+        print("Hi")
+        if(CoreDataHandler.cleanDeleteInstructors()){
+            print("Successfully deleted all instructors from Core Data.")
+            NSLog("Successfully deleted all instructors from Core Data. NSLog.")
+        }
+        else{
+            print("Could not remove instructors.")
+            NSLog("Could not remove instructors. NSLog.")
+        }
+        if(CoreDataHandler.cleanDeleteSections()){
+            print("Successfully deleted all sections from Core Data.")
+        }
+        else{
+          print("Could not delete all sections.")
+        }
+        if(CoreDataHandler.cleanDeleteStudents()){
+            print("Successfully deleted all students from Core Data.")
+        }
+        else{ print("could not delete all students.")}
         try! Auth.auth().signOut()
         mainInstance.currentInstructor?.loggedIn = false
         mainInstance.currentInstructor = nil
@@ -70,11 +107,17 @@ class InstructorHomeViewController: UIViewController, UIPickerViewDataSource, UI
     
     // returns the # of rows in each component..
     public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int{
-        return (mainInstance.currentInstructor?.sections.count)!
+        if(sections != nil){
+        return self.sections!.count
+        }
+        else {return 0}
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return mainInstance.currentInstructor?.sections[row].section_id
+        if(sections != nil){
+            return sections![row].section_id
+        }
+        else {return "None"}
     }
     
     

@@ -38,16 +38,15 @@ class SignUpViewController: UIViewController {
                 //Auth.auth().currentUser.
                 
                 if email.range(of:"mail") != nil {
-                    let professor = InstructorModel(username: username, email: email, password: pass, attStatus: false, radius: 100)
-                    mainInstance.instructors.append(professor)
-                    print("Successfully created professor with the following attributes: \n")
-                    dump(mainInstance.instructors)
+                    if(CoreDataHandler.addInstructor(username: username, email: email, password: pass, loggedIn: false)){
+                        print("Successfully created instructor using Core Data!")
+                    }
+                    
                 }
                 else {
-                    let student = StudentModel(username: username, email: email, password: pass)
-                    mainInstance.students.append(student)
-                    print("Successfully created student with the following attributes: \n")
-                    dump(mainInstance.students)
+                    if(CoreDataHandler.addStudent(username: username, password: pass, email: email, loggedIn: false)){
+                        print("Successfully created student using Core Data!")
+                    }
                 }
                 
                 

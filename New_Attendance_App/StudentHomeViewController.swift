@@ -15,9 +15,9 @@ class StudentHomeViewController: UIViewController, UIPickerViewDataSource, UIPic
     
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var attendanceButton: UIButton!
-    let sections = mainInstance.currentStudent?.getSections()
     
     let locationManager: CLLocationManager = CLLocationManager()
+    var sections:[Section]? = nil
     
         
     var didAttend = false
@@ -26,6 +26,8 @@ class StudentHomeViewController: UIViewController, UIPickerViewDataSource, UIPic
         pickerView.isHidden = false
         pickerView.delegate = self
         pickerView.dataSource = self
+        sections = mainInstance.currentStudent?.sections?.allObjects as? [Section]
+        pickerView.reloadAllComponents()
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background.png")!)
         
@@ -33,8 +35,18 @@ class StudentHomeViewController: UIViewController, UIPickerViewDataSource, UIPic
     
     @IBAction func handleLogout(_ sender: Any) {
         try! Auth.auth().signOut()
+        //mainInstance.currentStudent?.loggedIn = false
+        //mainInstance.currentStudent = nil
         mainInstance.currentStudent?.loggedIn = false
-        mainInstance.currentStudent = nil
+        if(CoreDataHandler.cleanDeleteInstructors()){
+            print("Successfully deleted all instructors from Core Data.")
+        }
+        if(CoreDataHandler.cleanDeleteSections()){
+            print("Successfully deleted all sections from Core Data.")
+        }
+        if(CoreDataHandler.cleanDeleteStudents()){
+            print("Successfully deleted all students from Core Data.")
+        }
         self.performSegue(withIdentifier: "backToHomeScreen", sender: self)
     }
     
@@ -102,7 +114,7 @@ class StudentHomeViewController: UIViewController, UIPickerViewDataSource, UIPic
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return sections![row].getSectionID()
+        return sections![row].section_id
     }
  
     
