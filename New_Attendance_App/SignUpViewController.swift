@@ -34,6 +34,7 @@ class SignUpViewController: UIViewController {
                     if(!CoreDataHandler.verifyInstructorExists(email: email)){
                     if(CoreDataHandler.addInstructor(username: username, email: email, password: pass, loggedIn: false)){
                         print("Successfully created instructor using Core Data!")
+                        self.performSegue(withIdentifier: "backToHome", sender: self)
                     }
                     }else{self.sendAlert(self, message: "Instructor account already exists")}
                 }
@@ -41,6 +42,7 @@ class SignUpViewController: UIViewController {
                     if(!CoreDataHandler.verifyStudentAccount(email: email, password: pass)){
                     if(CoreDataHandler.addStudent(username: username, password: pass, email: email, loggedIn: false)){
                         print("Successfully created student using Core Data!")
+                        self.performSegue(withIdentifier: "backToHome", sender: self)
                     }
                     }
                     else{self.sendAlert(self, message: "Student account already exists")}
