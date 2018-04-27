@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import CoreData
+
 
 class InstructorAddClassViewController: UIViewController {
     
@@ -42,7 +44,7 @@ class InstructorAddClassViewController: UIViewController {
         section.instructor = mainInstance.currentInstructor
         mainInstance.currentInstructor?.addToSections(section)
         let context = CoreDataHandler.getContext()
-        
+        print("added sections, now trying to save context.")
         do{
             print("Successfully saved Section with Section id...")
             print(section.section_id as Any)

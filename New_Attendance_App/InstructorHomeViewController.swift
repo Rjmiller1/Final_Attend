@@ -16,7 +16,6 @@ class InstructorHomeViewController: UIViewController, UIPickerViewDataSource, UI
     @IBOutlet weak var pickerView: UIPickerView!
     
     var sections:[Section]?
-    var section_ids:[String]?
     
     override func viewDidLoad() {
         
@@ -30,15 +29,10 @@ class InstructorHomeViewController: UIViewController, UIPickerViewDataSource, UI
 
         if(sections != nil){
         for i in sections! {
+            print("Sections not nil so one was added, attempting to print section item i.")
+            print(i)
             print(i.section_id ?? "none")
-            section_ids?.append(i.section_id!)
         }
-            print("Current sections to be sent to pickerView:")
-            if(section_ids != nil){
-            for i in section_ids!{
-                print(i)
-            }
-            }
         }
         pickerView.reloadAllComponents()
         super.viewDidLoad()
@@ -52,25 +46,6 @@ class InstructorHomeViewController: UIViewController, UIPickerViewDataSource, UI
     }
     
     @IBAction func handleLogout(_ sender: Any) {
-        print("Hi")
-        if(CoreDataHandler.cleanDeleteInstructors()){
-            print("Successfully deleted all instructors from Core Data.")
-            NSLog("Successfully deleted all instructors from Core Data. NSLog.")
-        }
-        else{
-            print("Could not remove instructors.")
-            NSLog("Could not remove instructors. NSLog.")
-        }
-        if(CoreDataHandler.cleanDeleteSections()){
-            print("Successfully deleted all sections from Core Data.")
-        }
-        else{
-          print("Could not delete all sections.")
-        }
-        if(CoreDataHandler.cleanDeleteStudents()){
-            print("Successfully deleted all students from Core Data.")
-        }
-        else{ print("could not delete all students.")}
         try! Auth.auth().signOut()
         mainInstance.currentInstructor?.loggedIn = false
         mainInstance.currentInstructor = nil

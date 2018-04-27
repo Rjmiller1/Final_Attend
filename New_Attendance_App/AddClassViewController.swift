@@ -14,7 +14,7 @@ import FirebaseDatabase
 class AddClassViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate{
     var section_id: String?
     @IBOutlet weak var pickerView: UIPickerView!
-    let sections = CoreDataHandler.getSectionIDs()
+    var sections:[Section]?
     
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -37,8 +37,6 @@ class AddClassViewController: UIViewController, UIPickerViewDataSource, UIPicker
             }
         }*/
         self.performSegue(withIdentifier: "toStudentHomeView", sender: self)
-
-
     }
     
     func sendAlert(_ sender: Any, alert: String, message: String){
@@ -63,6 +61,8 @@ class AddClassViewController: UIViewController, UIPickerViewDataSource, UIPicker
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background.png")!)
         pickerView.delegate = self
         pickerView.dataSource = self
+        sections = CoreDataHandler.getSections()
+        
         pickerView.reloadAllComponents()
     
     }
@@ -73,16 +73,25 @@ class AddClassViewController: UIViewController, UIPickerViewDataSource, UIPicker
     }
     
     public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int{
-        return sections!.count
+        if(sections != nil){
+            return sections!.count
+        }
+        else {return 0}
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return sections![row]
+        if(sections != nil){
+            return sections![row].section_id
+        }
+        else{return "None"}
     }
     
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        section_id = sections![row]
+        if(sections != nil){
+            section_id = sections![row].section_id
+        }
     }
+ 
 
 }

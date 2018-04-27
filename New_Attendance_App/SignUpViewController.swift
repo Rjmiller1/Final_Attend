@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Firebase
 
 class SignUpViewController: UIViewController {
     
@@ -31,50 +30,21 @@ class SignUpViewController: UIViewController {
         guard let email = emailField.text else { return }
         guard let pass = passwordField.text else { return }
         
-        Auth.auth().createUser(withEmail: email, password: pass) { user, error in
-            if error == nil && user != nil {
-                print("User created!")
-                
-                //Auth.auth().currentUser.
-                
                 if email.range(of:"mail") != nil {
+                    if(!CoreDataHandler.verifyInstructorExists(email: email)){
                     if(CoreDataHandler.addInstructor(username: username, email: email, password: pass, loggedIn: false)){
                         print("Successfully created instructor using Core Data!")
                     }
-                    
+                    }else{self.sendAlert(self, message: "Instructor account already exists")}
                 }
                 else {
+                    if(!CoreDataHandler.verifyStudentAccount(email: email, password: pass)){
                     if(CoreDataHandler.addStudent(username: username, password: pass, email: email, loggedIn: false)){
                         print("Successfully created student using Core Data!")
                     }
-                }
-                
-                
-                let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
-                changeRequest?.displayName = username
-                
-                changeRequest?.commitChanges { error in
-                    if error == nil {
-                        print("User display name changed!")
-                        self.dismiss(animated: false, completion: nil)
-                    } else {
-                        print("Error: \(error!.localizedDescription)")
-                        //self.sendAlert(self, message: "Invalid Account Credentials")
                     }
+                    else{self.sendAlert(self, message: "Student account already exists")}
                 }
-                
-                
-                //self.performSegue(withIdentifier: "toHomeScreen", sender:self)
-                
-            }
-            
-            else {
-                print("Error: \(error!.localizedDescription)")
-                self.sendAlert(self, message: "Invalid Account Credentials")
-            }
-            
-        }
-       
     }
     
     @IBAction func backButton(_ sender:Any){
@@ -98,19 +68,5 @@ class SignUpViewController: UIViewController {
             }}))
         self.present(alert, animated: true, completion: nil)
     }
-    
-
-    
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

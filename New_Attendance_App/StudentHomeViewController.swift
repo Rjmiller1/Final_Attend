@@ -110,11 +110,17 @@ class StudentHomeViewController: UIViewController, UIPickerViewDataSource, UIPic
     
     // returns the # of rows in each component..
     public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int{
-        return sections!.count
+        if(sections != nil){
+            return self.sections!.count
+        }
+        else{return 0}
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return sections![row].section_id
+        if(sections != nil){
+            return sections![row].section_id
+        }
+        else{return "None"}
     }
  
     

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Firebase
 
 class LoginViewController: UIViewController {
 
@@ -33,34 +32,32 @@ class LoginViewController: UIViewController {
     @IBAction func loginButton(_ sender: Any) {
         guard let email = emailField.text else { return }
         guard let pass = passwordField.text else { return }
-        
-        Auth.auth().signIn(withEmail: email, password: pass) { user, error in
-            if error == nil && user != nil {
-                if email.range(of:"mail") != nil {
+                    if email.range(of:"mail") != nil {
+                    if(CoreDataHandler.verifyInstructorAccount(email: email, password: pass)){
                     mainInstance.currentInstructor = CoreDataHandler.getInstructorByEmail(email: email)
                     mainInstance.currentInstructor?.loggedIn = true
                     print("Instructor logged in with following username/email")
                     print(mainInstance.currentInstructor?.username ?? "Not found")
                     
                     self.performSegue(withIdentifier: "toInstructorHomeScreen", sender:self)
-                    
+                    }
+                    else{
+                        self.sendAlert(self, message: "Error. incorrect username of password.")
                 }
+                    }
                 else {
-                    mainInstance.currentStudent = CoreDataHandler.getStudentByEmail(email: email)
-                    mainInstance.currentStudent?.loggedIn = true
-                    print("Student logged in with following username")
-                    print(mainInstance.currentStudent?.username ?? "Not found")
-                    
-                    self.performSegue(withIdentifier: "toStudentHomeScreen", sender:self)
-                    
-                }
-                
-                //self.dismiss(animated: false, completion: nil)
-            } else {
-                print("Error logging in: \(error!.localizedDescription)")
-                self.sendAlert(self, message: "Invalid Login Credentials")
-            }
-        }
+                        if(CoreDataHandler.verifyStudentAccount(email: email, password: pass)){
+                        mainInstance.currentStudent = CoreDataHandler.getStudentByEmail(email: email)
+                        mainInstance.currentStudent?.loggedIn = true
+                        print("Student logged in with following username")
+                        print(mainInstance.currentStudent?.username ?? "Not found")
+                        
+                        self.performSegue(withIdentifier: "toStudentHomeScreen", sender:self)
+                    }
+                    else{
+                        self.sendAlert(self, message: "Error. incorrect username of password.")
+                        }
+                    }
     }
     
     func sendAlert(_ sender: Any, message: String){

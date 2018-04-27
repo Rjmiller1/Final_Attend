@@ -319,6 +319,76 @@ class CoreDataHandler: NSObject {
         return placeholder
     }
     
+    class func verifyStudentExists(email: String) -> Bool{
+        let context = getContext()
+        let fetchRequest: NSFetchRequest<Student> = Student.fetchRequest()
+        var students: [Student]? = nil
+        let predicate = NSPredicate(format: "email == %@",email)
+        fetchRequest.predicate = predicate
+        
+        do{
+            students = try context.fetch(fetchRequest)
+            if students?.count == 1{
+                print("Student found by email in Core Data!")
+                return true
+            }
+            else{
+                print("More or less than one matching instructor email.")
+                return false
+            }
+        }catch{
+            print("Error, reached catch section.")
+        }
+        return false
+    }
+    
+    class func verifyStudentAccount(email: String, password: String) -> Bool{
+        if(verifyStudentExists(email: email)){
+            let student = getStudentByEmail(email: email)
+            if((student?.email == email) && (student?.password == password)){
+                print("Student authenticated successfully in CoreDataHandler.verifyStudentAccount!")
+                return true
+            }
+            else{return false}
+        }
+        return false;
+    }
+    
+    class func verifyInstructorExists(email: String) -> Bool{
+        let context = getContext()
+        let fetchRequest: NSFetchRequest<Instructor> = Instructor.fetchRequest()
+        var instructors: [Instructor]? = nil
+        let predicate = NSPredicate(format: "email == %@",email)
+        fetchRequest.predicate = predicate
+        
+        do{
+            instructors = try context.fetch(fetchRequest)
+            if instructors?.count == 1{
+                print("Instructor found by email in Core Data!")
+                return true
+            }
+            else{
+                print("More or less than one matching instructor email.")
+                return false
+            }
+        }catch{
+            print("Error, reached catch section.")
+        }
+        return false
+    }
+    
+    class func verifyInstructorAccount(email: String, password: String) -> Bool{
+        if(verifyInstructorExists(email: email)){
+            let instructor = getInstructorByEmail(email: email)
+            if((instructor?.email == email) && (instructor?.password == password)){
+                print("Instructor authenticated successfully in CoreDataHandler.verifyInstructorAccount!")
+                return true
+            }
+            else{return false}
+        }
+        return false;
+    }
+    
     
 }
 
