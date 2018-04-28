@@ -30,6 +30,8 @@ class InstructorAddClassViewController: UIViewController {
         self.performSegue(withIdentifier: "BackToInstructor2", sender: self)
     }
     
+
+    
     @IBAction func submitClass(_ sender: Any) {
         guard let section_id = addClassField?.text else { return }
       /*

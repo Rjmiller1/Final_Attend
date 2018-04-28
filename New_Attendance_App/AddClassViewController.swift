@@ -27,16 +27,15 @@ class AddClassViewController: UIViewController, UIPickerViewDataSource, UIPicker
     }
     
     @IBAction func addClass(_ sender: Any){
+        if(section_id != nil){
+        //mainInstance.currentStudent?.addToSections(mainInstance.currentSection!)
         let section = CoreDataHandler.getSectionBySectionID(section_id: section_id!)
         mainInstance.currentStudent?.addToSections(section)
-        /*for i in mainInstance.sections {
-            if(i.section_id == section_id){
-                student?.addSection(section: i)
-                print("Successfully added section: ",section_id as Any)
+        mainInstance.currentSection?.addToStudents(mainInstance.currentStudent!)
 
-            }
-        }*/
         self.performSegue(withIdentifier: "toStudentHomeView", sender: self)
+        }
+        else{sendAlert(self, alert: "oops", message: "Section_id was null.")}
     }
     
     func sendAlert(_ sender: Any, alert: String, message: String){
@@ -81,6 +80,7 @@ class AddClassViewController: UIViewController, UIPickerViewDataSource, UIPicker
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if(sections != nil){
+            section_id = sections![row].section_id
             return sections![row].section_id
         }
         else{return "None"}

@@ -61,8 +61,7 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         view.addSubview(mapView)
     }
     
-    func determineCurrentLocation()
-    {
+    func determineCurrentLocation(){
         locationManager = CLLocationManager()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -73,6 +72,18 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
             locationManager.startUpdatingLocation()
         }
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+        self.view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == radiusField{
+            textField.resignFirstResponder()
+        }
+        return true
+    }
+
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let userLocation:CLLocation = locations[0] as CLLocation

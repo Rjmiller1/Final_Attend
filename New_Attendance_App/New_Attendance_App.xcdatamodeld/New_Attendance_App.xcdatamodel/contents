@@ -12,6 +12,7 @@
         <attribute name="radius" optional="YES" attributeType="Integer 32" defaultValueString="100" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="section_id" optional="YES" attributeType="String" defaultValueString="&quot;none&quot;" syncable="YES"/>
         <attribute name="total" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="attendedStudents" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Student" inverseName="attendedSection" inverseEntity="Student" syncable="YES"/>
         <relationship name="instructor" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Instructor" inverseName="sections" inverseEntity="Instructor" syncable="YES"/>
         <relationship name="students" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Student" inverseName="sections" inverseEntity="Student" syncable="YES"/>
     </entity>
@@ -20,12 +21,13 @@
         <attribute name="loggedIn" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="password" optional="YES" attributeType="String" defaultValueString="&quot;none&quot;" syncable="YES"/>
         <attribute name="username" optional="YES" attributeType="String" defaultValueString="&quot;none&quot;" syncable="YES"/>
+        <relationship name="attendedSection" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Section" inverseName="attendedStudents" inverseEntity="Section" syncable="YES"/>
         <relationship name="instructors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Instructor" syncable="YES"/>
         <relationship name="sections" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Section" inverseName="students" inverseEntity="Section" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Section" positionX="-36" positionY="9" width="128" height="133"/>
-        <element name="Student" positionX="-63" positionY="-270" width="128" height="133"/>
         <element name="Instructor" positionX="187" positionY="-144" width="128" height="118"/>
+        <element name="Section" positionX="-36" positionY="9" width="128" height="150"/>
+        <element name="Student" positionX="-63" positionY="-270" width="128" height="150"/>
     </elements>
 </model>

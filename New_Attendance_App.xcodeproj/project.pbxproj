@@ -23,9 +23,10 @@
 		6CC0BCC220878706002E93EA /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC0BCC120878706002E93EA /* LocationViewController.swift */; };
 		6CC0BCC42087C039002E93EA /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CC0BCC32087C039002E93EA /* MapKit.framework */; };
 		6CC0BCC62087C07E002E93EA /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CC0BCC52087C07E002E93EA /* CoreLocation.framework */; };
-		6CC0BCC82087CE67002E93EA /* AttendanceReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC0BCC72087CE67002E93EA /* AttendanceReportViewController.swift */; };
 		6CC0BCD020882E8A002E93EA /* global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC0BCCF20882E8A002E93EA /* global.swift */; };
 		6CC0BCD220883671002E93EA /* InstructorAddClassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC0BCD120883671002E93EA /* InstructorAddClassViewController.swift */; };
+		720C0C3C2092D4CA00022292 /* AttendanceReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720C0C3B2092D4CA00022292 /* AttendanceReportViewController.swift */; };
+		720C0C3E2092FCC300022292 /* explosion.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 720C0C3D2092FCC200022292 /* explosion.jpg */; };
 		72A27EE0208EF291008C8471 /* New_Attendance_App.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 72A27EDE208EF291008C8471 /* New_Attendance_App.xcdatamodeld */; };
 		72A27EE2209058FB008C8471 /* CoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A27EE1209058FB008C8471 /* CoreDataHandler.swift */; };
 /* End PBXBuildFile section */
@@ -49,9 +50,10 @@
 		6CC0BCC120878706002E93EA /* LocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		6CC0BCC32087C039002E93EA /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		6CC0BCC52087C07E002E93EA /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		6CC0BCC72087CE67002E93EA /* AttendanceReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceReportViewController.swift; sourceTree = "<group>"; };
 		6CC0BCCF20882E8A002E93EA /* global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = global.swift; sourceTree = "<group>"; };
 		6CC0BCD120883671002E93EA /* InstructorAddClassViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructorAddClassViewController.swift; sourceTree = "<group>"; };
+		720C0C3B2092D4CA00022292 /* AttendanceReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceReportViewController.swift; sourceTree = "<group>"; };
+		720C0C3D2092FCC200022292 /* explosion.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = explosion.jpg; path = ../../../../Downloads/explosion.jpg; sourceTree = "<group>"; };
 		72A27EDF208EF291008C8471 /* New_Attendance_App.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = New_Attendance_App.xcdatamodel; sourceTree = "<group>"; };
 		72A27EE1209058FB008C8471 /* CoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHandler.swift; sourceTree = "<group>"; };
 		BDBCE1A9E52E11117AAA229B /* Pods_New_Attendance_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_New_Attendance_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -108,7 +110,6 @@
 				509A87AA207C1DC6004FC98C /* ViewController.swift */,
 				509A87AC207C1DC6004FC98C /* Main.storyboard */,
 				6CC0BCCF20882E8A002E93EA /* global.swift */,
-				6CC0BCC72087CE67002E93EA /* AttendanceReportViewController.swift */,
 				6CC0BCC120878706002E93EA /* LocationViewController.swift */,
 				507164C7207D565300D0E494 /* GoogleService-Info.plist */,
 				50C023A4207D4665009A8A2D /* SignUpViewController.swift */,
@@ -118,10 +119,12 @@
 				6CC0BCD120883671002E93EA /* InstructorAddClassViewController.swift */,
 				507164CB207D886200D0E494 /* InstructorHomeViewController.swift */,
 				507164CD2085864800D0E494 /* AddClassViewController.swift */,
+				720C0C3D2092FCC200022292 /* explosion.jpg */,
 				509A87AF207C1DC7004FC98C /* Assets.xcassets */,
 				509A87B1207C1DC7004FC98C /* LaunchScreen.storyboard */,
 				509A87B4207C1DC7004FC98C /* Info.plist */,
 				72A27EE1209058FB008C8471 /* CoreDataHandler.swift */,
+				720C0C3B2092D4CA00022292 /* AttendanceReportViewController.swift */,
 			);
 			path = New_Attendance_App;
 			sourceTree = "<group>";
@@ -206,6 +209,7 @@
 				507164C8207D565300D0E494 /* GoogleService-Info.plist in Resources */,
 				509A87B0207C1DC7004FC98C /* Assets.xcassets in Resources */,
 				509A87AE207C1DC6004FC98C /* Main.storyboard in Resources */,
+				720C0C3E2092FCC300022292 /* explosion.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,10 +284,10 @@
 				509A87BD207C20EC004FC98C /* LoginViewController.swift in Sources */,
 				509A87AB207C1DC6004FC98C /* ViewController.swift in Sources */,
 				509A87A9207C1DC6004FC98C /* AppDelegate.swift in Sources */,
-				6CC0BCC82087CE67002E93EA /* AttendanceReportViewController.swift in Sources */,
 				72A27EE0208EF291008C8471 /* New_Attendance_App.xcdatamodeld in Sources */,
 				509A87BB207C1E75004FC98C /* HomeViewController.swift in Sources */,
 				72A27EE2209058FB008C8471 /* CoreDataHandler.swift in Sources */,
+				720C0C3C2092D4CA00022292 /* AttendanceReportViewController.swift in Sources */,
 				50C023A5207D4665009A8A2D /* SignUpViewController.swift in Sources */,
 				507164CE2085864900D0E494 /* AddClassViewController.swift in Sources */,
 				6CC0BCC220878706002E93EA /* LocationViewController.swift in Sources */,
@@ -428,9 +432,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Q257J2AF5U;
 				INFOPLIST_FILE = New_Attendance_App/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Miller.New-Attendance-App";
+				PRODUCT_BUNDLE_IDENTIFIER = mikeG;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -443,9 +449,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Q257J2AF5U;
 				INFOPLIST_FILE = New_Attendance_App/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Miller.New-Attendance-App";
+				PRODUCT_BUNDLE_IDENTIFIER = mikeG;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

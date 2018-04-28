@@ -49,6 +49,25 @@ class SignUpViewController: UIViewController {
                 }
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+        self.view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        if textField == usernameField{
+            emailField.becomeFirstResponder()
+        }
+        else if textField == emailField{
+            passwordField.becomeFirstResponder()
+        }
+        else if textField == passwordField{
+            textField.resignFirstResponder()
+        }
+        return true
+    }
+
+    
     @IBAction func backButton(_ sender:Any){
         self.performSegue(withIdentifier: "backToHome", sender:self)
     }

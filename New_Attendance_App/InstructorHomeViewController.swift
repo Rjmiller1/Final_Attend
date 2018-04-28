@@ -16,6 +16,7 @@ class InstructorHomeViewController: UIViewController, UIPickerViewDataSource, UI
     @IBOutlet weak var pickerView: UIPickerView!
     
     var sections:[Section]?
+    var pickedSection: Section?
     
     override func viewDidLoad() {
         
@@ -54,15 +55,29 @@ class InstructorHomeViewController: UIViewController, UIPickerViewDataSource, UI
     
     @IBAction func enableAttendance(_ sender: Any){
         attendanceOpen = true;
+        if(pickedSection != nil){
+            pickedSection?.active = true
+            print("Given section has successfully been added using pickerview selection.")
+        }
+        else{
+            print("pickerview method is not working.")
+        }
         sendAlert(self, message: "Attendance Enabled");
     }
     
     @IBAction func disableAttendance(_ sender: Any){
         attendanceOpen = false;
-        sendAlert(self, message: "Attendance Disabled");
+        if(pickedSection != nil){
+            pickedSection?.active = false
+            sendAlert(self, message: "Attendance Disabled")
+        }
+        else{
+            sendAlert(self, message: "Unable to disable attendance... Section not selected.")
+        }
     }
     
     @IBAction func sendToLocation(_ sender: Any){
+        mainInstance.currentSection = pickedSection!
         self.performSegue(withIdentifier: "toLocation", sender: self)
     }
 
@@ -85,11 +100,15 @@ class InstructorHomeViewController: UIViewController, UIPickerViewDataSource, UI
         if(sections != nil){
         return self.sections!.count
         }
-        else {return 0}
+        else {
+            print("Sections is nil")
+            return 0}
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if(sections != nil){
+            pickedSection = sections![row]
+            mainInstance.currentSection = pickedSection
             return sections![row].section_id
         }
         else {return "None"}

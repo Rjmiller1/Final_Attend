@@ -13,12 +13,14 @@ import MapKit
 
 class StudentHomeViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, CLLocationManagerDelegate {
     
-    var inRadius = false
+    var inRadius = true
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var attendanceButton: UIButton!
     
     let locationManager: CLLocationManager = CLLocationManager()
     var sections:[Section]? = nil
+    var pickedSection: Section?
+
     
         
     var didAttend = false
@@ -41,9 +43,9 @@ class StudentHomeViewController: UIViewController, UIPickerViewDataSource, UIPic
         
         locationManager.distanceFilter = 100
         
-        let geoFenceRegion:CLCircularRegion = CLCircularRegion(center: CLLocationCoordinate2DMake(51.509, -0.1337), radius: 10000, identifier: "Test around area")
-        
-        locationManager.startMonitoring(for: geoFenceRegion)
+                sendAlert(self, alert: "Error", message: "Instructor never set attendance radius")
+                let geoFenceRegion:CLCircularRegion = CLCircularRegion(center: CLLocationCoordinate2DMake(51.509, -0.1337), radius: 10000, identifier: "Test around area")
+                locationManager.startMonitoring(for: geoFenceRegion)
         
     }
     
@@ -72,15 +74,26 @@ class StudentHomeViewController: UIViewController, UIPickerViewDataSource, UIPic
         if pickerView.isHidden{
             pickerView.isHidden = false
         }
-        if (attendanceOpen == true){
+        if(pickedSection != nil && inRadius == true){
+            if (pickedSection?.active == true){
             didAttend = true
+            if(pickedSection != nil){
+            pickedSection?.addToAttendedStudents(mainInstance.currentStudent!)
+            print("Successfully added Student to section")
+            print(pickedSection ?? "none")
             sendAlert(self, alert: "Success!", message: "Attendance Recorded!");
             //print("MADE IT HERE")
+            }
         }
         else{
             sendAlert(self, alert: "Uh Oh!", message: "Attendance period is not open");
         }
+        }
+        else{
+            sendAlert(self, alert: "Error", message: "You are not in attendance radius/period is not .")
+        }
     }
+    
     
     @IBAction func checkLocationPressed(_ sender: Any){
         if inRadius == true{
@@ -125,6 +138,7 @@ class StudentHomeViewController: UIViewController, UIPickerViewDataSource, UIPic
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if(sections != nil){
+            pickedSection = sections![row]
             return sections![row].section_id
         }
         else{return "None"}

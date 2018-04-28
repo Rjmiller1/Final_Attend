@@ -248,6 +248,8 @@ class CoreDataHandler: NSObject {
         return currentInstructor!
     }
     
+    
+    
     class func getSectionBySectionID(section_id: String) -> Section{
         let context = getContext()
         let fetchRequest: NSFetchRequest<Section> = Section.fetchRequest()

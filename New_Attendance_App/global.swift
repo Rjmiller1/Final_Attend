@@ -9,6 +9,7 @@ import Foundation
 class Main{
     var currentInstructor: Instructor?
     var currentStudent: Student?
+    var currentSection: Section?
     
     
     

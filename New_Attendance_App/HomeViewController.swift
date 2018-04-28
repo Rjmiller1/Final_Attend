@@ -21,6 +21,7 @@ class HomeViewController: UIViewController {
 
     @IBAction func goToLoginScreen(_ sender:Any){
         self.performSegue(withIdentifier: "toLoginScreen", sender:self)
+        
     }
     
     @IBAction func goToSignUpScreen(_ sender:Any){
