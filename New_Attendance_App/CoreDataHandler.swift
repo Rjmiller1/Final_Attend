@@ -27,6 +27,7 @@ class CoreDataHandler: NSObject {
         managedObject.setValue(password, forKey: "password")
         managedObject.setValue(email, forKey: "email")
         managedObject.setValue(loggedIn, forKey: "loggedIn")
+        print("let me commit")
         
         do{
             try context.save()
